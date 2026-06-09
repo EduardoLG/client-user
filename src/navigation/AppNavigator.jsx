@@ -5,9 +5,9 @@ import { COLORS } from "../shared/constants/theme"
 
 const AppNavigator = () => {
     return (
-        <NavigatorContainer>
+        <NavigationContainer >
             <AuthStack />
-        </NavigatorContainer>
+        </NavigationContainer >
     )
 }
 

@@ -1,6 +1,6 @@
 import { TouchableOpacity, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { COLORS, SPACING, FONT_SIZE } from "../constants/theme";
-import AnimatedProps from "react-native/types_generated/Libraries/Animated/nodes/AnimatedProps";
+// import AnimatedProps from "react-native/types_generated/Libraries/Animated/nodes/AnimatedProps";
 
 const Button = ({ title, onPress, loading, variant = "primary", style, ...props }) => {
     const isSecondary = variant === "secondary";

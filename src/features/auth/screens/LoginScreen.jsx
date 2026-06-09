@@ -13,6 +13,7 @@ import { useForm, Controller } from "react-hook-form"
 import { COLORS, SPACING, FONT_SIZE } from "../../../shared/constants/theme"
 import Input from "../../../shared/components/Input"
 import Button from "../../../shared/components/Button"
+import { useAuth} from "../hooks/useAuth"
  
 import kinalSportsLogo from "../../../../assets/kinal_sports2.png"
 
@@ -27,7 +28,14 @@ const LoginScreen = ({ navigation }) => {
     })
  
     const onSubmit = async (data) => {
- 
+        try {
+            await handleSubmit(data)
+        } catch (error) {
+            console.error(error);
+            const message = 
+                error.response?.date?.message || "Error al iniciar sesion"
+                Alert.alert("Error", message)
+        }
     }
  
     return (

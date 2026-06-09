@@ -1,7 +1,24 @@
-import { View } from "react-native"
+import {
+    View,
+    Text,
+    StyleSheet,
+    Image,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    Alert
+} from "react-native"
+import { useForm, Controller } from "react-hook-form"
+import { COLORS, SPACING, FONT_SIZE } from "../../../shared/constants/theme"
+import Input from "../../../shared/components/Input"
+import Button from "../../../shared/components/Button"
+import { useAuth } from "../hooks/useAuth"
 
+import kinalSportsLogo from "../../../../assets/kinal_sports2.png"
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ navigation }) => {
+
+    const { handleRegister, loading } = useAuth()
     const { control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             name: "",
@@ -14,7 +31,19 @@ const RegisterScreen = () => {
     })
  
     const onSubmit = async (data) => {
- 
+        try {
+            await handleSubmit(data)
+
+            Alert.alert(
+                "Registro exitoso",
+                "Tu cuenta ha sido creada. Ahora puedes iniciar sesion"
+                [{text: "OK", onPress: () => navigation.navigate("Login")}]
+            )
+        } catch (error) {
+            console.error(error)
+            const message = error.response?.data?.message || "Error al registrarse"
+            Alert.alert("Error", message)
+        }
     }
  
     return (
